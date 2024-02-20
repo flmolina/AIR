@@ -2233,6 +2233,7 @@ typedef struct {
   PyObject *__pyx_int_0;
   PyObject *__pyx_int_1;
   PyObject *__pyx_int_2;
+  PyObject *__pyx_int_7;
   PyObject *__pyx_int_300;
   PyObject *__pyx_tuple_;
   PyObject *__pyx_tuple__3;
@@ -2345,6 +2346,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_int_0);
   Py_CLEAR(clear_module_state->__pyx_int_1);
   Py_CLEAR(clear_module_state->__pyx_int_2);
+  Py_CLEAR(clear_module_state->__pyx_int_7);
   Py_CLEAR(clear_module_state->__pyx_int_300);
   Py_CLEAR(clear_module_state->__pyx_tuple_);
   Py_CLEAR(clear_module_state->__pyx_tuple__3);
@@ -2435,6 +2437,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_int_0);
   Py_VISIT(traverse_module_state->__pyx_int_1);
   Py_VISIT(traverse_module_state->__pyx_int_2);
+  Py_VISIT(traverse_module_state->__pyx_int_7);
   Py_VISIT(traverse_module_state->__pyx_int_300);
   Py_VISIT(traverse_module_state->__pyx_tuple_);
   Py_VISIT(traverse_module_state->__pyx_tuple__3);
@@ -2535,6 +2538,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_int_0 __pyx_mstate_global->__pyx_int_0
 #define __pyx_int_1 __pyx_mstate_global->__pyx_int_1
 #define __pyx_int_2 __pyx_mstate_global->__pyx_int_2
+#define __pyx_int_7 __pyx_mstate_global->__pyx_int_7
 #define __pyx_int_300 __pyx_mstate_global->__pyx_int_300
 #define __pyx_tuple_ __pyx_mstate_global->__pyx_tuple_
 #define __pyx_tuple__3 __pyx_mstate_global->__pyx_tuple__3
@@ -2723,7 +2727,7 @@ static PyObject *__pyx_pf_5catch_open(CYTHON_UNUSED PyObject *__pyx_self) {
  *                     rate=RATE,
  *                     input=True,             # <<<<<<<<<<<<<<
  *                     frames_per_buffer=CHUNK,
- *                     input_device_index=1)
+ *                     input_device_index=7)
  */
   if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_input, Py_True) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
 
@@ -2731,11 +2735,11 @@ static PyObject *__pyx_pf_5catch_open(CYTHON_UNUSED PyObject *__pyx_self) {
  *                     rate=RATE,
  *                     input=True,
  *                     frames_per_buffer=CHUNK,             # <<<<<<<<<<<<<<
- *                     input_device_index=1)
+ *                     input_device_index=7)
  * 
  */
   if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_frames_per_buffer, __pyx_v_CHUNK) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_input_device_index, __pyx_int_1) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_input_device_index, __pyx_int_7) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
 
   /* "catch.pyx":17
  * 
@@ -3509,6 +3513,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitConstants(void) {
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_2 = PyInt_FromLong(2); if (unlikely(!__pyx_int_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_7 = PyInt_FromLong(7); if (unlikely(!__pyx_int_7)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_300 = PyInt_FromLong(300); if (unlikely(!__pyx_int_300)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
