@@ -30,7 +30,7 @@ stream = p.open(format=FORMAT,
                 input_device_index=1)
 
 fig, ax= plt.subplots()
-ax.set_ylim(0,10000)
+ax.set_ylim(0,600)
 ax.set_xlim(0,100)
 x=np.arange(0,int(N/2+1),1)
 
