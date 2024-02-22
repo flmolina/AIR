@@ -1,6 +1,6 @@
 ###Detector de fallas utilizando Binary classifcation
 ##Escrito por: Luis Fernando Molina antequera -github:flmolina
-from classes_n_functions import phase, True_FFT, data_Mag, data_angle
+from classes_n_functions import phase, True_FFT_phase, data_Mag, data_angle
 import numpy as np
 import time
 
@@ -29,8 +29,8 @@ Currents = [amplitud/4 * np.sin((2 * np.pi * f0 * t)),
 
 inicio=time.time()
 
-FFT_V=True_FFT(Voltages,N)
-FFT_I=True_FFT(Currents,N)
+FFT_V=True_FFT_phase(Voltages,N)
+FFT_I=True_FFT_phase(Currents,N)
 final=time.time()
 
 
@@ -38,4 +38,4 @@ Fase_A=phase(V=data_Mag(FFT_V[0]) , I=data_Mag(FFT_I[0]), Theta_I=data_angle(FFT
 Fase_B=phase(V=data_Mag(FFT_V[1]) , I=data_Mag(FFT_I[1]), Theta_I=data_angle(FFT_I[1],FFT_V[1]),Theta_V=data_angle(FFT_V[0],FFT_V[1]))
 Fase_C=phase(V=data_Mag(FFT_V[2]) , I=data_Mag(FFT_I[2]), Theta_I=data_angle(FFT_I[2],FFT_V[2]),Theta_V=data_angle(FFT_V[0],FFT_V[2]))
 
-print 
+Fase_A.mostrar_atributos()

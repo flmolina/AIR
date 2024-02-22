@@ -1,6 +1,6 @@
 import numpy as np
 import numpy.fft as fft
-
+import matplotlib.pyplot as plt
 class phase:
     def __init__(phase, V, I, Theta_V, Theta_I):
         phase.V=V     
@@ -9,12 +9,20 @@ class phase:
         phase.Theta_I=Theta_I
     
     def mostrar_atributos(phase):
-        print("|V|: "+str(phase.V)+str(" Volts") )
-        print("|I|:  " +str(phase.I)+str(" Amperes"))
-        print("Theta_V " +str(phase.Theta_V)+str("°") )
-        print("Theta_I " +str(phase.Theta_I)+str("°") )
+        output = "|V|: {} Volts\n|I|: {} Amperes\nTheta_V: {}°\nTheta_I: {}°".format(
+        phase.V, phase.I, phase.Theta_V, phase.Theta_I)
+        return(output)
 
-def True_FFT(Voltages,N):
+
+def True_FFT(Voltage,N):
+    FFT_VX=(fft.fft(Voltage))
+    x=FFT_VX
+    x=np.array((x[0:int (N/2+1)])*2/N)
+    x[0]=x[0]*2
+    FFT_V=x
+    return FFT_V    
+
+def True_FFT_phase(Voltages,N):
     FFT_VX=(fft.fft(Voltages,axis=1))
     FFT_V=[]
     for i in range(0,len(FFT_VX)):
