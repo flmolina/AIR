@@ -9,8 +9,8 @@ class phase:
         phase.Theta_I=Theta_I
     
     def mostrar_atributos(phase):
-        output = "|V|: {} Volts\n|I|: {} Amperes\nTheta_V: {}°\nTheta_I: {}°".format(
-        phase.V, phase.I, phase.Theta_V, phase.Theta_I)
+        output =str( "|V|: {} Volts\n|I|: {} Amperes\nTheta_V: {}°\nTheta_I: {}°".format(
+        phase.V, phase.I, phase.Theta_V, phase.Theta_I))
         return(output)
 
 
