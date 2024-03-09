@@ -6,9 +6,9 @@ import struct
 import threading
 import time
 
-Phase_A=clnf.phase(120,0.5,0,0)
-Phase_B=clnf.phase(120,0.5,-120,-120)
-Phase_C=clnf.phase(120,0.5,120,120)
+Phase_A=clnf.phase(110,0.5,0,0)
+Phase_B=clnf.phase(110,0.5,-120,-120)
+Phase_C=clnf.phase(110,0.5,120,120)
 
 
 
@@ -25,7 +25,7 @@ def catch():
     fs = 41400  # Tasa de muestreo (muestras por segundo)
     ##Parametros del sistema
     tstep=1/fs #Tiempo de muestreo
-    f0=3600 #Frecuencia fundamental 
+    f0=60 #Frecuencia fundamental 
     N=int(fs/f0)  #Factor de ajuste para la FFT
     print (N)
     CICLO=345
@@ -44,14 +44,17 @@ def catch():
         inicio=time.time()
         data= stream.read(frames_per_buffer,exception_on_overflow=False)
         data_int= struct.unpack(str(frames_per_buffer)+"h",data)
-    
-        FFT=clnf.True_FFT(data_int,N)
+        print(max(abs(np.fft.fft(data_int))))
+        FFT=clnf.True_FFT(data_int,N)/10
         Phase_A.I=round(clnf.data_Mag(FFT),3)
 
         etiqueta1.config(text=Phase_A.mostrar_atributos())
+        etiqueta2.config(text=Phase_B.mostrar_atributos())
+        etiqueta3.config(text=Phase_C.mostrar_atributos())
+        
         final=time.time()
 
-        print((final-inicio)*1000)
+        #print((final-inicio)*1000)
 
 
 
@@ -70,7 +73,7 @@ for i in range(5):
     ventana.grid_columnconfigure(i, weight=1)
 
 # Crear las etiquetas
-font_style = ("Console", 14)  # Cambiar la fuente y el tamaño aquí
+font_style = ("FixedSys", 20)  # Cambiar la fuente y el tamaño aquí
 etiqueta1 = tk.Label(ventana, text="Etiqueta 1", font=font_style, width=20, height=5)
 etiqueta2 = tk.Label(ventana, text="Etiqueta 2", font=font_style, width=20, height=5)
 etiqueta3 = tk.Label(ventana, text="Etiqueta 3", font=font_style, width=20, height=5)
