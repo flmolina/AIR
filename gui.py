@@ -61,13 +61,15 @@ def catch():
 ## ------------Estetica de la interfaz-------------  ##
 ventana = tk.Tk()
 ventana.title("Ejemplo de GUI con Tkinter")
-
+ventana.configure(bg="#69D36C")
 # Establecer las dimensiones de la ventana (ancho x alto)
 ancho_ventana = 1024
 alto_ventana = 600
 ventana.geometry(f"{ancho_ventana}x{alto_ventana}")  # Ancho: 1024 píxeles, Alto: 600 píxeles
 
 # Configurar la rejilla para que se expanda uniformemente
+
+
 for i in range(5):
     ventana.grid_rowconfigure(i, weight=1)
     ventana.grid_columnconfigure(i, weight=1)
