@@ -33,13 +33,13 @@ def True_FFT_phase(Voltages,N):
     return FFT_V
 
 
-def data_Mag(FFT):
-    Magnitude=abs(FFT[1]) ##Magnitud de la componente fundamental
+def data_Mag(FFT,Z):
+    Magnitude=abs(FFT[1*Z]) ##Magnitud de la componente fundamental
     return Magnitude
 
 ##Ajustar segun el modelo de adquisición 
-def data_angle(FFT1, FFT2):
-    Angle=(np.angle(FFT2[1])-np.angle(FFT1[1])) *180/np.pi  ##Fase de la componente funadamental
+def data_angle(FFT1, FFT2,Z):
+    Angle=(np.angle(FFT2[1*Z])-np.angle(FFT1[1*Z])) *180/np.pi  ##Fase de la componente funadamental
     return Angle
 
 

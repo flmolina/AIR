@@ -22,15 +22,12 @@ def catch():
     global Phase_A
     FORMAT = pyaudio.paInt16  # Formato de audio
     CHANNELS = 1  # Número de canales (1 para mono, 2 para estéreo)
-    fs = 41400  # Tasa de muestreo (muestras por segundo)
+    fs = 48000  # Tasa de muestreo (muestras por segundo)
     ##Parametros del sistema
     tstep=1/fs #Tiempo de muestreo
     f0=60 #Frecuencia fundamental 
-    N=int(fs/f0)  #Factor de ajuste para la FFT
-    print (N)
-    CICLO=345
-    N_Ciclos=2
-    frames_per_buffer=int(CICLO*N_Ciclos)
+    CICLOS=4
+    N=int(fs/f0) * CICLOS #Numero de muestras
     # Inicializar PyAudio
     p = pyaudio.PyAudio()
     # Abrir un stream para la entrada de audio en tiempo real
@@ -38,15 +35,15 @@ def catch():
                     channels=CHANNELS,
                     rate=fs,
                     input=True,
-                    frames_per_buffer=frames_per_buffer, ##numero de muestras para procesar (tiempo procesado)
+                    frames_per_buffer=N, ##numero de muestras para procesar (tiempo procesado)
                     input_device_index=1)
     while True:
         inicio=time.time()
-        data= stream.read(frames_per_buffer,exception_on_overflow=False)
-        data_int= struct.unpack(str(frames_per_buffer)+"h",data)
-        print(max(abs(np.fft.fft(data_int))))
-        FFT=clnf.True_FFT(data_int,N)/10
-        Phase_A.I=round(clnf.data_Mag(FFT),3)
+        data= stream.read(N,exception_on_overflow=False)
+        data_int= struct.unpack(str(N)+"h",data)
+        FFT=clnf.True_FFT(data_int,N)
+
+        Phase_A.I=round(clnf.data_Mag(FFT,CICLOS),3)
 
         etiqueta1.config(text=Phase_A.mostrar_atributos())
         etiqueta2.config(text=Phase_B.mostrar_atributos())
