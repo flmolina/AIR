@@ -43,3 +43,9 @@ def data_angle(FFT1, FFT2,Z):
     return Angle
 
 
+def update(data, new_data):
+    old_data = max(0, len(data) - len(new_data))
+
+    data_update = np.concatenate((data[-old_data:], new_data))
+    
+    return data_update
