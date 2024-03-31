@@ -18,8 +18,8 @@ Fs=19200
 CICLOS=2          #Ciclos para muestrear y procesar
 REF =4.92            #Tension de alimentacion
                   # Cambiar segun el valor medido en AVDD
-Ajuste_magnitud=((0.376*np.sqrt(2)/0.111))
-print(Ajuste_magnitud)
+
+
 N=int(Fs*(CICLOS/120))
 ADC = ADS1263.ADS1263()
 
@@ -27,7 +27,15 @@ ADC.ADS1263_init_ADC1('ADS1263_19200SPS')
 ADC.ADS1263_ConfigADC(7, 0xE)
 ADC.ADS1263_SetMode(0) # 0 is singleChannel, 1 is diffChannel9
 
+
+
+
 def stream(channel):
+    if channel>2: #Medicion de un canal de corriente
+        Ajuste_magnitud=((0.376*np.sqrt(2)/0.111))
+    else:         #Medición de un canal de tensión
+        Ajuste_magnitud=((0.376*np.sqrt(2)/0.111))
+        
     vector=[]
     ##Inicializacion del STREAM de datos
     for i in range(0,int(N)):
