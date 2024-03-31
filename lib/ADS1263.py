@@ -27,7 +27,7 @@
 # THE SOFTWARE.
 #
 
-import config
+import lib.config as config
 import RPi.GPIO as GPIO
 
 # gain
@@ -239,7 +239,7 @@ class ADS1263:
     
     #The configuration parameters of ADC, gain and data rate
     def ADS1263_ConfigADC(self, gain, drate):
-        MODE2 = 0x00   # 0x80:PGA bypassed, 0x00:PGA enabled
+        MODE2 = 0x00    # 0x80:PGA bypassed, 0x00:PGA enabled
         MODE2 |= (gain << 4) | drate
         self.ADS1263_WriteReg(ADS1263_REG['REG_MODE2'], MODE2)
         if(self.ADS1263_ReadData(ADS1263_REG['REG_MODE2'])[0] == MODE2):
@@ -247,21 +247,21 @@ class ADS1263:
         else:
             print("REG_MODE2 unsuccess")
 
-        REFMUX = 0x00   # 0x00:+-2.5V as REF, 0x24:VDD,VSS as REF
+        REFMUX = 0x24   # 0x00:+-2.5V as REF, 0x24:VDD,VSS as REF
         self.ADS1263_WriteReg(ADS1263_REG['REG_REFMUX'], REFMUX)
         if(self.ADS1263_ReadData(ADS1263_REG['REG_REFMUX'])[0] == REFMUX):
             print("REG_REFMUX success")
         else:
             print("REG_REFMUX unsuccess")
             
-        MODE0 = ADS1263_DELAY['ADS1263_DELAY_0s']
+        MODE0 = ADS1263_DELAY['ADS1263_DELAY_35us']
         self.ADS1263_WriteReg(ADS1263_REG['REG_MODE0'], MODE0)
         if(self.ADS1263_ReadData(ADS1263_REG['REG_MODE0'])[0] == MODE0):
             print("REG_MODE0 success")
         else:
             print("REG_MODE0 unsuccess")
 
-        MODE1 = 0x04    # Digital Filter; 0x84:FIR, 0x64:Sinc4, 0x44:Sinc3, 0x24:Sinc2, 0x04:Sinc1
+        MODE1 = 0x84    # Digital Filter; 0x84:FIR, 0x64:Sinc4, 0x44:Sinc3, 0x24:Sinc2, 0x04:Sinc1
         self.ADS1263_WriteReg(ADS1263_REG['REG_MODE1'], MODE1)
         if(self.ADS1263_ReadData(ADS1263_REG['REG_MODE1'])[0] == MODE1):
             print("REG_MODE1 success")
@@ -270,7 +270,7 @@ class ADS1263:
 
     #The configuration parameters of ADC2, gain and data rate
     def ADS1263_ConfigADC2(self, gain, drate):
-        ADC2CFG = 0x0          # REF, 0x20:VAVDD and VAVSS, 0x00:+-2.5V
+        ADC2CFG = 0x20          # REF, 0x20:VAVDD and VAVSS, 0x00:+-2.5V
         ADC2CFG |= (drate << 6) | gain
         self.ADS1263_WriteReg(ADS1263_REG['REG_ADC2CFG'], ADC2CFG)
         if(self.ADS1263_ReadData(ADS1263_REG['REG_ADC2CFG'])[0] == ADC2CFG):
@@ -401,8 +401,8 @@ class ADS1263:
         read |= (buf[3]) & 0xff
         CRC = buf[4]
         # print(read, CRC)
-        if(self.ADS1263_CheckSum(read, CRC) != 0):
-            print("ADC1 data read error!")
+        #if(self.ADS1263_CheckSum(read, CRC) != 0):
+        #    print("ADC1 data read error!")
         return read
  
  

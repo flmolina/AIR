@@ -1,7 +1,7 @@
 import tkinter as tk
-import classes_n_functions as clnf
+import lib.classes_n_functions as clnf
 import numpy as np
-import ADS1263
+import lib.ADS1263 as ADS1263
 import threading
 import time
 import RPi.GPIO as GPIO
