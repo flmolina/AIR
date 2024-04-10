@@ -261,7 +261,7 @@ class ADS1263:
         else:
             print("REG_MODE0 unsuccess")
 
-        MODE1 = 0x84    # Digital Filter; 0x84:FIR, 0x64:Sinc4, 0x44:Sinc3, 0x24:Sinc2, 0x04:Sinc1
+        MODE1 = 0x04    # Digital Filter; 0x84:FIR, 0x64:Sinc4, 0x44:Sinc3, 0x24:Sinc2, 0x04:Sinc1
         self.ADS1263_WriteReg(ADS1263_REG['REG_MODE1'], MODE1)
         if(self.ADS1263_ReadData(ADS1263_REG['REG_MODE1'])[0] == MODE1):
             print("REG_MODE1 success")
@@ -548,4 +548,3 @@ class ADS1263:
         config.module_exit()
         
 ### END OF FILE ###
-
