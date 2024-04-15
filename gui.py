@@ -1,17 +1,26 @@
 import tkinter as tk
-import classes_n_functions as clnf
+import lib.classes_n_functions as clnf
 import numpy as np
-import pyaudio
-import struct
+import lib.ADS1263 as ADS1263
 import threading
 import time
-
-Phase_A=clnf.phase(110,0.5,0,0)
-Phase_B=clnf.phase(110,0.5,-120,-120)
-Phase_C=clnf.phase(110,0.5,120,120)
+import RPi.GPIO as GPIO
+#Inicializacion de cada una de las fases
+Phases=[clnf.phase(110,0.5),
+        clnf.phase(110,0.5),
+        clnf.phase(110,0.5)]
 
 I_DISPARO=100
+I_Ajuste=0.376 #Amperes
+T_Ajuste=120 #Volts
 
+N=24
+REF = 5.08          # Modify according to actual voltage
+                    # external AVDD and AVSS(Default), or internal 2.5V
+ADC = ADS1263.ADS1263()
+if (ADC.ADS1263_init_ADC1('ADS1263_38400SPS') == -1):
+    exit()
+ADC.ADS1263_SetMode(0) 
 
 def actualizar_etiquetas(A,B,C,D):
     # Aquí puedes definir la lógica para actualizar el contenido de las etiquetas
@@ -20,49 +29,26 @@ def actualizar_etiquetas(A,B,C,D):
     etiqueta3.config(text=C)
     etiqueta4.config(text=D)
 def catch():
-    global Phase_A
-    FORMAT = pyaudio.paInt16  # Formato de audio
-    CHANNELS = 1  # Número de canales (1 para mono, 2 para estéreo)
-    fs = 48000  # Tasa de muestreo (muestras por segundo)
-    ##Parametros del sistema
-    tstep=1/fs #Tiempo de muestreo
-    f0=60 #Frecuencia fundamental 
-    CICLOS=4
-    N=int(fs/f0) * CICLOS #Numero de muestras
-    # Inicializar PyAudio
-    p = pyaudio.PyAudio()
-    # Abrir un stream para la entrada de audio en tiempo real
-    stream = p.open(format=FORMAT,
-                    channels=CHANNELS,
-                    rate=fs,
-                    input=True,
-                    frames_per_buffer=N, ##numero de muestras para procesar (tiempo procesado)
-                    input_device_index=1)
-    while True:
-        inicio=time.time()
-        data= stream.read(N,exception_on_overflow=False)
-        data_int= struct.unpack(str(N)+"h",data)
-        FFT=clnf.True_FFT(data_int,N)
-
-        Phase_A.I=round(clnf.data_Mag(FFT,CICLOS),3)
-       
-        etiqueta1.config(text=Phase_A.mostrar_atributos())
-        etiqueta2.config(text=Phase_B.mostrar_atributos())
-        etiqueta3.config(text=Phase_C.mostrar_atributos())
-        if Phase_A.I>I_DISPARO:
-            etiqueta4.config(text="FALLA")
+    while(1):
+        ADC_Data=clnf.get_data(ADC,REF,N)
+        for z in range (0,3):
+            Phases[z].V=clnf.RMS(ADC_Data[z]) 
+            Phases[z].I=clnf.RMS(ADC_Data[z+3]) 
+            Phases[z].S=Phases[z].V*Phases[z].I
+            Phases[z].Z=Phases[z].V/Phases[z].I
+        etiqueta1.config(text=Phases[0].mostrar_atributos())
+        etiqueta2.config(text=Phases[1].mostrar_atributos())
+        etiqueta3.config(text=Phases[2].mostrar_atributos())
+        if Phases[0].V<100:
+                etiqueta4.config(text="FALLA")
         else:
-            etiqueta4.config(text="NO FALLA")
-        final=time.time()
-
-        #print((final-inicio)*1000)
+                etiqueta4.config(text="NO FALLA")
 
 
 
 ## ------------Estetica de la interfaz-------------  ##
 ventana = tk.Tk()
-ventana.title("Ejemplo de GUI con Tkinter")
-ventana.configure(bg="#5585D1")
+ventana.title("AIR")
 # Establecer las dimensiones de la ventana (ancho x alto)
 ancho_ventana = 1024
 alto_ventana = 600
