@@ -16,7 +16,6 @@ ASSETS_PATH = OUTPUT_PATH / Path("assets/frame0")
 def RMS_window(ruta_interfaz):
     global window
     window.withdraw()  # Oculta la ventana actual
-    nueva_ventana = Toplevel()  # Crea una nueva ventana
     with open(ruta_interfaz, "r") as f:
         codigo_interfaz = f.read()
     exec(codigo_interfaz, globals(), locals())
