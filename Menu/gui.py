@@ -13,9 +13,14 @@ OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("assets/frame0")
 
 
-def abrir_nueva_ventana(ventana_principal):
-    # Crear una nueva ventana
-    nueva_ventana =Toplevel(ventana_principal)
+def RMS_window(ruta_interfaz):
+    global window
+    window.withdraw()  # Oculta la ventana actual
+    nueva_ventana = Toplevel()  # Crea una nueva ventana
+    with open(ruta_interfaz, "r") as f:
+        codigo_interfaz = f.read()
+    exec(codigo_interfaz, globals(), locals())
+
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -86,7 +91,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: RMS_window("RMS/RMS_gui.py"),
     relief="flat"
 )
 button_1.place(
@@ -127,23 +132,6 @@ button_3.place(
     width=147.0,
     height=180.0
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 window.resizable(False, False)
 window.mainloop()
