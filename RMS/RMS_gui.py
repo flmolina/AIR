@@ -4,6 +4,7 @@
 
 import random
 from pathlib import Path
+import threading
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
@@ -17,13 +18,24 @@ ASSETS_PATH = OUTPUT_PATH / Path("assets/frame0")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def actualizar_etiqueta():
-    while(1):
-        for i in range(0,5):
-            nuevo_texto =random.rand(0,10)
-            Labels[i].config(text=nuevo_texto)
+def actualizar_etiqueta(A,B,C,D,E,F):
+    textos=[A,B,C,D,E,E,F]
+    for i in range(0,6):
+            nuevo_texto = textos[i]
+            if i <3:
+                Labels[i].config(text=str(nuevo_texto)+str( " V"))
+            else:
+                Labels[i].config(text=str(nuevo_texto)+str( " A"))
 
-
+def catch():
+     while(1):
+        A=random.randint(1,10)
+        B=random.randint(1,10)
+        C=random.randint(1,10)
+        D=random.randint(1,10)
+        E=random.randint(1,10)
+        F=random.randint(1,10)
+        actualizar_etiqueta(A,B,C,D,E,F)
 window_RMS = Tk()
 
 window_RMS.geometry("1024x600")
@@ -235,6 +247,9 @@ canvas.create_rectangle(
     fill="#BECDDA",
     outline="")
 
+thread=threading.Thread(target=catch)
+thread.daemon=True
+thread.start()
 
 
 window_RMS.resizable(False, False)
