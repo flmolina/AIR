@@ -1,0 +1,77 @@
+import tkinter as tk
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import threading
+import time
+
+# Función para calcular los ángulos en un hilo separado
+def calcular_angulos_thread():
+    while (1):
+
+        # Simular el cálculo de los ángulos (aquí puedes colocar tu propio cálculo)
+        angulos_grados = np.random.randint(0, 360, size=3)
+        # Actualizar los ángulos globales
+        global angulos_globales
+        angulos_globales = angulos_grados
+# Función para graficar los fasores en un hilo separado
+def graficar_fasores_thread():
+    while (1):
+        # Obtener los ángulos globales
+        global angulos_globales
+        angulos_grados = angulos_globales
+        
+        # Graficar los fasores con los ángulos actuales
+        ax.clear()
+        ax.set_theta_direction(-1)  # Sentido horario
+        ax.set_theta_zero_location('N')  # Norte arriba
+        ax.set_ylim(0, 0.1)
+        # Graficar cada fasor con una flecha sin etiquetas
+        for i, angulo in enumerate(angulos_grados):
+            x = np.radians(angulo)
+            ax.quiver(0, 0, x, 1, color=colores[i])
+
+        # Actualizar el gráfico
+        canvas.draw()
+        canvas.flush_events
+
+# Función para cerrar la ventana y detener la ejecución del código
+def close_window():
+    root.quit()
+    root.destroy()
+
+# Configuración de la ventana
+root = tk.Tk()
+root.title("Diagrama de Fasores")
+
+# Coordenadas para ubicar la gráfica
+x_pos, y_pos = 50, 50
+width, height = 400, 400  # Ajustar el tamaño de la gráfica aquí
+
+# Establecer la geometría de la ventana de Tkinter
+root.geometry(f"{width}x{height}+{x_pos}+{y_pos}")
+
+# Crear el gráfico dentro de un rectángulo de dimensiones específicas
+fig = plt.figure(figsize=(5, 5))  # Ajustar el tamaño de la figura aquí
+ax = fig.add_subplot(111, polar=True)
+canvas = FigureCanvasTkAgg(fig, master=root)
+canvas.get_tk_widget().place(x=0, y=0, width=width, height=height)
+
+# Colores de los fasores
+colores = ['r', 'g', 'b']
+
+# Inicializar la gráfica con ángulos aleatorios
+angulos_globales = np.random.randint(0, 360, size=3)
+
+# Crear hilos para calcular ángulos y graficar fasores
+thread_calcular_angulos = threading.Thread(target=calcular_angulos_thread, daemon=True)
+thread_calcular_angulos.start()
+
+thread_graficar_fasores = threading.Thread(target=graficar_fasores_thread, daemon=True)
+thread_graficar_fasores.start()
+
+# Llamar a close_window cuando se cierre la ventana
+root.protocol("WM_DELETE_WINDOW", close_window)
+
+# Mostrar la interfaz
+root.mainloop()

@@ -14,6 +14,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import random
+import time
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\LUIS\Documents\GitHub\RNPF\build\assets\frame0")
 
@@ -24,6 +25,7 @@ def actualizar_etiqueta_atributos(A,B,C,D,E,F,G,H,I,J,K,L):
                 Labels[i].config(text=str(nuevo_texto))
 
 def catch():
+        
          while(1):
             A=random.randint(1,10)  
             B=random.randint(1,10)  
@@ -37,8 +39,11 @@ def catch():
             J=random.randint(60,70)*-1
             K=random.randint(30,40)
             L=random.randint(80,90)
+            Angulos=[G,H,I,J,K,L]
+            global Angulos_globales
+            Angulos_globales=Angulos
             actualizar_etiqueta_atributos(A,B,C,D,E,F,G,H,I,J,K,L)
-            actualizar_grafica(G,H,I,J,K,L)
+            #actualizar_grafica(G,H,I,J,K,L)
 # Función para graficar un fasor en coordenadas polares con una flecha
 def graficar_fasor_polar_arrow(ax, angulo, color):
     magnitud = 1  # Magnitud fija
@@ -47,33 +52,35 @@ def graficar_fasor_polar_arrow(ax, angulo, color):
                  arrowprops=dict(facecolor=color, shrink=0.005,width=1.8,headwidth=7))
 
 # Función para graficar los fasores
-def graficar_fasores(ax, angulos_grados):
+def graficar_fasores(ax,angulos_grados):
     ax.clear()
-    ax.set_theta_direction(-1)  # Sentido horario
+    ax.set_theta_direction(-1)  # Sentido horarioc
     #ax.set_theta_zero_location('N')  # Norte arriba
 
     # Convertir ángulos de grados a radianes
     angulos_radianes = np.radians(angulos_grados)
 
     # Colores de los fasores
-    colores = ['k','r','c' ,'g', 'y','b','m']
 
 
     # Graficar cada fasor con una flecha
     for i, angulo in enumerate(angulos_radianes):
-        
-        graficar_fasor_polar_arrow(ax, angulo, colores[i])
+           
 
+        graficar_fasor_polar_arrow(ax, angulo, colores[i])
     canvas.draw()
     canvas.flush_events()
 
+colores = ['k','r','c' ,'g', 'y','b','m']
 # Función para actualizar los ángulos y la gráfica
-def actualizar_grafica(G,H,I,J,K,L):
-    # Generar nuevos ángulos aleatorios para los fasores
-    angulos_grados = [G,H,I,J,K,L]
-    # Actualizar la gráfica con los nuevos ángulos
-    graficar_fasores(ax, angulos_grados)
-    # Programar la próxima actualización después de 2 segundos (2000 milisegundos)
+def actualizar_grafica():
+    while(1):    
+        global Angulos_globales
+        angulos_grados=Angulos_globales
+        # Generar nuevos ángulos aleatorios para los fasores
+        # Actualizar la gráfica con los nuevos ángulos
+        graficar_fasores(ax, angulos_grados)
+        # Programar la próxima actualización después de 2 segundos (2000 milisegundos)
 
 
 def relative_to_assets(path: str) -> Path:
@@ -423,9 +430,14 @@ angulos_iniciales = np.random.randint(0, 360, size=4)
 graficar_fasores(ax, angulos_iniciales)
 
 
-thread=threading.Thread(target=catch)
-thread.daemon=True
-thread.start()
+thread_catch=threading.Thread(target=catch)
+thread_catch.daemon=True
+
+thread_phasors=threading.Thread(target=actualizar_grafica)
+thread_phasors.daemon=True
+
+thread_catch.start()
+thread_phasors.start()
 window.protocol("WM_DELETE_WINDOW", close_window)
 window.resizable(False, False)
 window.mainloop()
