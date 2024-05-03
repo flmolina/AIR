@@ -11,7 +11,6 @@ import numpy as np
 import lib.ADS1263 as ADS1263
 import threading
 import time
-import RPi.GPIO as GPIO
 #Inicializacion de cada una de las fases
 
 Phases=[clnf.phase(110,0.5),
