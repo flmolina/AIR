@@ -2,6 +2,7 @@ import numpy as np
 import joblib
 import sklearn
 import time
+import matplotlib.pyplot as plt
 Model=joblib.load("NN.joblib")
 
 
@@ -40,33 +41,31 @@ Falla=np.array([ 1103, #VA
                 np.deg2rad(7)   ,
                 np.deg2rad(-131)    ,
                 np.deg2rad(-103)  ])
+Ys=[]
+for i in range (0, 100,1):
+    z=1+(i/100)
+    Normal=          np.array([ 427*z, #VA
+                    625*z, #VA
+                    286*z, ##VA
+                    (122)/(3.7*z),      #Ohms
+                    (127)/(4.8*z),    #Ohms
+                    (124)/(2.3*z),   #Ohms
+                    120,          #Volts
+                    120,          #Volts
+                    120,          #Volts
+                    np.deg2rad(-0.24)       ,
+                    np.deg2rad(-120)    ,
+                    np.deg2rad(120)     ,
+                    3.7*z,          #Amperes          
+                    4.8*z,          #Amperes
+                    2.3*z,          #Amperes
+                    np.deg2rad(16)   ,
+                    np.deg2rad(-141)    ,
+                    np.deg2rad(64)  ])
 
 
-z=1.6
-Normal=          np.array([ 427, #VA
-                625, #VA
-                286, ##VA
-                (122)/(3.7*z),      #Ohms
-                (127)/(4.8*z),    #Ohms
-                (124)/(2.3*z),   #Ohms
-                122,          #Volts
-                127,          #Volts
-                124,          #Volts
-                np.deg2rad(-0.24)       ,
-                np.deg2rad(-120)    ,
-                np.deg2rad(120)     ,
-                3.7*z,          #Amperes          
-                4.8*z,          #Amperes
-                2.3*z,          #Amperes
-                np.deg2rad(16)   ,
-                np.deg2rad(-141)    ,
-                np.deg2rad(64)  ])
-
-
-
-
-
-X=predict(Falla,Model)[0]
-Y=predict(Normal,Model)[0]
-print("condición de Falla " +str(X))
-print("condición Normal "   +str(Y))
+    Y=predict(Normal,Model)[0]
+    Ys.append(Y)
+    #print("Corriente al "+str(np.round((z*100),1))+str("%= ")   +str(Y))
+plt.plot(Ys)
+plt.show()
