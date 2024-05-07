@@ -4,6 +4,7 @@ import sklearn
 import time
 import matplotlib.pyplot as plt
 Model=joblib.load("NN.joblib")
+#Matriz de Confusión:
 
 
 def predict(data,Model):
@@ -64,8 +65,8 @@ for i in range (0, 100,1):
                     np.deg2rad(64)  ])
 
 
+    inicio=time.time()
     Y=predict(Normal,Model)[0]
-    Ys.append(Y)
+    final=time.time()
     #print("Corriente al "+str(np.round((z*100),1))+str("%= ")   +str(Y))
-plt.plot(Ys)
-plt.show()
+    print(str((final-inicio)*1000))
