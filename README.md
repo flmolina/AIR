@@ -1,6 +1,7 @@
 ![Uninorte](https://d30mzt1bxg5llt.cloudfront.net/public/uploads/images/_signatoryLogo/LogoUninorte_MEN_2017.png)
 
 # **Proyecto final "AIR"**: Dispositivo de protección basado en inteligencia artificial
+Desarrollado por: Luis Fernando Molina Antequera 
 
 
 # **Manual de usuario**
