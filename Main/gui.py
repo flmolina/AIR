@@ -124,10 +124,9 @@ def phasor_window():
         cerrar_procesos(window_fasor)
         
     
-        
+   ##Configuración estetica de la ventana##     
 
     window_fasor = Toplevel()
-    proceso=1
     window_fasor.geometry("1024x600")
     window_fasor.configure(bg = "#212E4D")
     canvas = Canvas(
