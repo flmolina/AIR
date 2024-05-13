@@ -41,8 +41,13 @@ Ingrese a la carpeta del repositorio, luego a la carpeta main y ejecute el archi
 ![GUI](ruta/a/imagen.jpg)
 
 RMS le otorgará la vista de las tensiones y corrientes RMS captadas por los sensores de tensión y corriente. 
+
 ![RMS](ruta/a/imagen.jpg)
+
 En la ventana Phasors usted podrá observar adicionalmente el desfase angular que existe entre todas estas señales teniendo como referencia aquella señal conectada al canal 0.
+
 ![Phasors](ruta/a/imagen.jpg)
+
 Por último, la pestaña events almacena todos los eventos que el dispositivo registre como falla, en esta, usted tendrá la opción de reiniciar estos datos. La información correspondiente también la podrá extraer adicionalmente de un archivo de Excel presente en la carpeta `main/Assets` del repositorio.
+
 ![Events](ruta/a/imagen.jpg)
