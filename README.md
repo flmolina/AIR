@@ -1,5 +1,5 @@
 ![Uninorte](https://upload.wikimedia.org/wikipedia/commons/f/ff/Logo_uninorte_colombia.jpg)
-<span style="font-size: 2em;">**Proyecto final**</span>
+<span style="font-size: 10em;">**Proyecto final**</span>
 <span style="font-size: 2em;">*AIR: Dispositivo de protección basado en inteligencia artificial*</span>
 
 <span style="font-size: 1em;">**Manual de usuario**</span>
