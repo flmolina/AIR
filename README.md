@@ -1,12 +1,12 @@
-![Uninorte](https://upload.wikimedia.org/wikipedia/commons/f/ff/Logo_uninorte_colombia.jpg)
-<span style="font-size: 10px;">**Proyecto final**</span>
-<span style="font-size: 2px;">*AIR: Dispositivo de protección basado en inteligencia artificial*</span>
+![Uninorte](https://d30mzt1bxg5llt.cloudfront.net/public/uploads/images/_signatoryLogo/LogoUninorte_MEN_2017.png)
 
-<span style="font-size: 1px;">**Manual de usuario**</span>
+# **Proyecto final "AIR"**: Dispositivo de protección basado en inteligencia artificial
 
-<span style="font-size: 1.6px;">**Índice**</span>
 
-[TOC]
+# **Manual de usuario**
+
+
+
 
 #### Arquitectura del dispositivo
 Este dispositivo está constituido por los siguientes elementos:
