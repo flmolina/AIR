@@ -19,7 +19,7 @@ Este dispositivo está constituido por los siguientes elementos:
 #### Imágenes del dispositivo
 ### Conexión del dispositivo
 Antes de empezar a utilizar el dispositivo, debe realizar y/o revisar la conexión de todos los elementos siguiendo el diagrama mostrado a continuación:
-![Conexiones](ruta/a/imagen.jpg)
+![Conexiones](README_FILES/Conexiones.png)
 ### Primeros pasos
 Si es la primera vez que enciende el dispositivo, deberá tener en cuenta las indicaciones del [primer encendido](https://www.raspberrypi.com/documentation/computers/getting-started.html) de una Raspberry Pi 3B+. Una vez haya concluido con esto, deberá habilitar la interfaz de comunicación SPI del dispositivo. Para realizar esta tarea, debe abrir una terminal de comandos ejecutando la combinación de teclas `Ctrl+Alt+T`.
 
