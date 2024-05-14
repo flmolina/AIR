@@ -37,7 +37,7 @@ Diríjase a la carpeta principal de este repositorio. En esta, encontrará un ar
 
 
 ### ¿Cómo utilizar el dispositivo?
-Ingrese a la carpeta del repositorio, luego a la carpeta main y ejecute el archivo de Python "gui.py". Esto desplegará la ventana principal de la interfaz con la que funciona el dispositivo. En esta se encuentran las 3 opciones de visualización de parámetros.
+Ingrese a la carpeta del repositorio, luego a la carpeta main y ejecute el archivo de Python "gui.py". Esto desplegará la ventana principal de la interfaz con la que funciona el dispositivo. En esta se encuentran las 3 opciones de visualización de parámetros. Adicionalmente, usted tendra la opción de enviar una señal de disparo o de apertura al dispositivo interruptor que esté utilizando.
 
 ![GUI](README_FILES/GUI.png)
 
