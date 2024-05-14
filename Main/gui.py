@@ -113,10 +113,10 @@ def phasor_window():
     def actualizar_grafica():
         while(1):
                 print("graficando")    
-                #global Angulos_globales
+                global Angulos_globales
                 angulos_grados=Angulos_globales
-                #graficar_fasores(ax, angulos_grados)
-                #time.sleep(3)
+                graficar_fasores(ax, angulos_grados)
+                time.sleep(2)
     def close_window():
         proc=0
         global proceso
@@ -674,7 +674,6 @@ def RMS_window():
                 cerrar_procesos(window_RMS)
             
             else:
-                ADC.close()
                 label_Falla.config(text="Normal")
             #final=time.time()
             #print(str((final-inicio)*1000))
@@ -1022,6 +1021,39 @@ button_3.place(
     width=147.0,
     height=180.0
 )
+
+
+button_4 = Button(
+    text="Open Breaker",
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: ADC.trigger(),
+    relief="flat",
+    fg="#D9D9D9",
+    font=("Inter Light", 30 * -1),
+    bg="#212E4D")
+    
+button_4.place(
+    x=39.83,
+    y=474,
+)
+
+button_5 = Button(
+    text="Close Breaker",
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: ADC.close(),
+    relief="flat",
+    fg="#D9D9D9",
+    font=("Inter Light", 30 * -1),
+    bg="#212E4D")
+    
+button_5.place(
+    x=275,
+    y=474,
+)
+
+
 label_font = font=("Inter Light", 30 * -1)
 label_fecha_hora = Label(window, 
                          font=label_font,
