@@ -80,5 +80,5 @@ Suponiendo que usted use un modelo que utilice las tensiones y sus magnitudes en
 ### Notas
 - Este dispositivo solo admite modelos de redes neuronales entrenadas con las librerías scikit-learn de Python.
 - Debido al alto consumo de recursos de la función Phasors, la habilidad de proteger el sistema usando el modelo solo se encuentra habilitada en la función de RMS. (Esto no implica que no se puedan usar los ángulos en los modelos que usted desee entrenar).
-- En caso de o
+- En caso de observar un compoartamiento "lento" del dispositivo luego de utilizar la ventana Phasors, se recomienda cerrar la aplicación y volverla a abrir.
 
