@@ -52,3 +52,33 @@ En la ventana Phasors usted podrá observar adicionalmente el desfase angular qu
 Por último, la pestaña events almacena todos los eventos que el dispositivo registre como falla, en esta, usted tendrá la opción de reiniciar estos datos. La información correspondiente también la podrá extraer adicionalmente de un archivo de Excel presente en la carpeta `main/Assets` del repositorio.
 
 ![Events](README_FILES/EVENTS.png)
+
+
+#### ¿Cómo cargar un modelo de aprendizaje de máquina?
+
+Diríjase al archivo "gui.py" en la carpeta "Main". Edite la línea 619: `Model=joblib.load(relative_to_assets("NN2.joblib"))` de forma tal que quede de la siguiente manera: `Model=joblib.load(relative_to_assets("Su_Modelo_de_IA.joblib"))`.
+
+Adicionalmente, deberá seleccionar los parámetros con los que usted entrenó su modelo y planea hacer predicciones. Para realizar esto, diríjase a la línea 659 `Estado=np.array([IA,IB,IC])` e ingrese los parámetros en el orden con el que entrenó su modelo. Los parámetros disponibles actualmente se listan a continuación:
+
+- VA: Magnitud de tensión de la fase A
+- VB: Magnitud de tensión de la fase B
+- VC: Magnitud de tensión de la fase C
+- IA: Magnitud de corriente de la fase A
+- IB: Magnitud de corriente de la fase B
+- IC: Magnitud de Corriente de la fase C
+- VAP: Ángulo de la tensión en la fase A
+- VBP: Ángulo de la tensión en la fase B
+- VCP: Ángulo de la tensión en la fase C
+- IAP: Ángulo de la corriente en la fase A
+- IBP: Ángulo de la corriente en la fase B
+- ICP: Ángulo de la corriente en la fase C
+
+Suponiendo que usted use un modelo que utilice las tensiones y sus magnitudes en este orden: VA, VB, VC, VAP, VBP, VCP, usted deberá cambiar la línea de la siguiente manera:
+
+`Estado=np.array([VA, VB, VC, VAP, VBP, VCP])`
+
+### Notas
+- Este dispositivo solo admite modelos de redes neuronales entrenadas con las librerías scikit-learn de Python.
+- Debido al alto consumo de recursos de la función Phasors, la habilidad de proteger el sistema usando el modelo solo se encuentra habilitada en la función de RMS. (Esto no implica que no se puedan usar los ángulos en los modelos que usted desee entrenar).
+- En caso de o
+
